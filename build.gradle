@@ -69,10 +69,6 @@ test {
     useJUnitPlatform()
 }
 
-task 'testFirefox' (type:Test) {
-    systemProperties["selenide.browser"] = "firefox";
-}
-
 task 'testFirefox95' (type:Test) {
     systemProperties["selenide.browser"] = "firefox";
     systemProperties["selenide.browserVersion"]= "95.0";
