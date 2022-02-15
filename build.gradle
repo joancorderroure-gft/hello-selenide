@@ -79,10 +79,6 @@ task 'testFirefox95' (type:Test) {
 
 }
 
-task 'testEdge' (type:Test) {
-    systemProperties["selenide.browser"] = "edge";
-}
-
 task 'testOpera' (type:Test) {0
     systemProperties["selenide.browser"] = "opera";
     systemProperties["selenide.browserSize"]="600x800";
