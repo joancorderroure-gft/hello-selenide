@@ -1,6 +1,9 @@
 plugins {
     id 'java'
     id 'io.qameta.allure' version '2.9.3'
+    id 'jacoco'
+    id 'pmd'
+    id 'info.solidsoft.pitest' version '1.7.0'
 }
 
 group 'com.sinensia'
@@ -45,10 +48,31 @@ tasks.withType(Test) {
     systemProperties["selenide.browser"]="edge";
     // systemProperties["selenide.browserVersion"]="97.0";
     systemProperties["selenide.browserSize"]="1024x768";
+    finalizedBy jacocoTestReport
+
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+    }
+}
+
+pmd {
+    consoleOutput = true
+    ignoreFailures = true
+}
+
+pitest {
+    junit5PluginVersion = '0.12'
+    outputFormats = ['XML', 'HTML']
+    timestampedReports = false
 }
 
 test {
-
+    ignoreFailures = true
+    useJUnitPlatform()
 }
 
 task 'testFirefox' (type:Test) {
